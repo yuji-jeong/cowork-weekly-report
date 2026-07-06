@@ -3,7 +3,7 @@
 name: [skill-name]  # e.g., weekly-pipeline-report, deal-health-snapshot
 description: [One sentence — what this report does and when to trigger it. e.g., "Generates a weekly pipeline health report from HubSpot and Fireflies data; trigger when reviewing deals at the start of each week."]
 version: 1.0
-author: [Your Name]
+author: yuji-jeong
 data_sources:
   - [MCP name]  # e.g., HubSpot
   - [MCP name]  # e.g., Fireflies
@@ -67,6 +67,31 @@ Example: "This report helps AEs decide which deals to push this week and which t
 
 ---
 
+<!-- Visualization Guide: Tells Claude which chart to use for each metric. Pick the chart by the MESSAGE you want to send, not by the data type. This is what a data analyst does implicitly. -->
+## Visualization Guide
+
+Match each metric to the message you want it to send, then use the chart for that message. Do not let Claude pick charts freely.
+
+| Metric | Message type | Chart to use | Why this chart |
+|--------|-------------|--------------|----------------|
+| [Metric name] | [Comparison / Trend over time / Part-of-whole / Distribution / Relationship] | [Chart] | [One line] |
+| [Metric name] | [Message type] | [Chart] | [One line] |
+| [Metric name] | [Message type] | [Chart] | [One line] |
+
+**Message-type → chart cheat sheet:**
+- **Comparison** (contrast values across categories) → **bar chart**
+- **Trend over time** (change across weeks/months) → **line chart**
+- **Part-of-whole** (composition / breakdown) → **stacked bar** (use a pie only for 2–3 slices)
+- **Distribution** (spread, clustering, outliers) → **histogram** or **box plot**
+- **Relationship** (correlation between two values) → **scatter plot**
+
+**Chart rules:**
+- Every chart title states the *finding*, not the variable names. [e.g., "Pipeline slipped 12% after the holiday" — not "Pipeline value by week"]
+- One dominant series per chart; de-emphasize everything secondary (lighter color / thinner line).
+- If a metric is a single number, use a KPI card, not a chart.
+
+---
+
 <!-- Data Source Mapping: Tells Claude exactly where to pull each number. The more specific, the fewer hallucinations. -->
 ## Data Source Mapping
 
@@ -85,9 +110,9 @@ Example: "This report helps AEs decide which deals to push this week and which t
 
 Produce sections in this exact order:
 
-1. **[Section name]** — [format: e.g., KPI card row] — [what it shows]
-2. **[Section name]** — [format: e.g., table, sorted by close date] — [what it shows]
-3. **[Section name]** — [format: e.g., 2–3 sentence narrative] — [what it shows]
+1. **Summary / What's Going On** — [format: 2–3 sentence narrative] — **Mandatory.** The 30-second read. Use BLUF (bottom-line-up-front): state the North Star Metric and its movement in the first sentence, then explain it. For each point, apply **So What → Why → Now What** (why it matters → most likely cause → what to do). Every claim carries a number — no "significant," "up," or "trending" without a figure.
+2. **[Section name]** — [format: e.g., KPI card row] — [what it shows]
+3. **[Section name]** — [format: e.g., table, sorted by close date] — [what it shows]
 4. **[Section name]** — [format: e.g., bulleted list] — [what it shows]
 5. **[Section name]** — [format: e.g., chart or sparkline] — [what it shows]
 
@@ -103,6 +128,8 @@ Produce sections in this exact order:
   - [e.g., Keep font sizes ≥14px for legibility in Slack screenshots]
   - [e.g., Use a dark background (#0f0f0f) with white text]
   - [e.g., Accent color: #[HEX]]
+  - One dominant focal point per view (the North Star number or its chart); everything else is visually secondary.
+  - Chart titles state the finding, not the variable names.
 
 ---
 
@@ -112,7 +139,7 @@ Produce sections in this exact order:
 - **File type:** [e.g., single self-contained HTML file, inline markdown block]
 - **Delivery method:** [e.g., rendered as an artifact in the chat, pasted inline, saved to Google Drive]
 - **Required sections checklist:**
-  - [ ] [Section 1]
+  - [ ] Summary / What's Going On (mandatory first section)
   - [ ] [Section 2]
   - [ ] [Section 3]
   - [ ] [Section 4]

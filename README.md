@@ -1,6 +1,8 @@
 # Co-work Weekly Report Skill Template
 
-A fill-in-the-blank skill template for building your own automated weekly report inside Claude Co-work — no extra tools, no extra subscriptions.
+A fill-in-the-blank skill template for building your own automated weekly report inside Claude Co-work. No extra tools, no extra subscriptions.
+
+You give it your metrics and sources, and it works like a data analyst on top of them: it picks the right chart for each number, leads with the story, and flags what changed and why. The result reads in 30 seconds, not 30 minutes.
 
 > This template was built as part of a YouTube tutorial. [Watch the video →](#) *(link coming soon)*
 
@@ -77,6 +79,8 @@ That's it. Type your trigger phrase at the start of each week and your report ru
 
 ## What the template covers
 
+The template doesn't just collect numbers. It encodes the craft a good data analyst applies by reflex: choosing the right chart for each metric and leading with the story, so the report is understood in 30 seconds.
+
 ### Goal
 What decision or action does this report enable? Defining this first prevents you from building a report nobody acts on.
 
@@ -87,13 +91,16 @@ The single metric the whole report is built around — with its calculation and 
 3–5 supporting metrics that explain movement in the North Star.
 
 ### Data Source Mapping
-A table mapping every metric to its exact source, field, and any filters — so Claude knows precisely where to pull each number.
+A table mapping every metric to its exact source, field, and any filters, so Claude knows precisely where to pull each number.
+
+### Visualization Guide
+Which chart to use for each metric, picked by the *message* (comparison, trend, part-of-whole, distribution, relationship) rather than the data type. This is the chart-selection instinct of a data analyst, written down so Claude doesn't guess.
 
 ### Report Structure
-The exact sections your output report must contain, in order, with format specified (table, narrative, KPI card, etc.).
+The exact sections your report must contain, in order. It starts with a mandatory **Summary / What's Going On** written bottom-line-up-front (So What, Why, Now What), so the reader gets the takeaway before the detail. Every other section specifies its format (table, narrative, KPI card, etc.).
 
 ### Design Language
-The visual style, UI library reference, and layout notes that make your report look intentional — not like default AI output.
+The visual style, UI library reference, and layout notes that make your report look intentional rather than default AI output. It also covers data-viz hierarchy: one dominant focal point, and chart titles that state the finding rather than the variable names.
 
 ### Output Contract
 What "done" looks like: file type, delivery method, required sections checklist, tone, and length target.
